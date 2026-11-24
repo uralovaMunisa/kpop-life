@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-POP UNIVERSE // Interactive & Shopping Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0b0e;
+            --surface: #141419;
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* SAHIFALAR TIZIMI */
+        .page {
+            display: none;
+            width: 100vw;
+            min-height: 100vh;
+            padding: 40px 5%;
+            animation: fadeIn 0.5s ease;
+        }
+        .page.active { display: flex; flex-direction: column; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 1-SAHIFA: HERO LANDING */
+        #page-hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #page-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #page-hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .epic-btn {
+            background: #ffffff;
+            color: #000000;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
+            transition: 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .epic-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 45px rgba(255,255,255,0.7);
+        }
+
+        /* 2-SAHIFA: JAMOALARNI TANLASH */
+        #page-select h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .team-btn {
+            padding: 20px 25px;
+            border-radius: 16px;
+            border: 2px solid rgba(255,255,255,0.15);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .team-btn:hover {
+            transform: translateY(-5px);
+            border-color: #fff;
+            filter: brightness(1.2);
+        }
+
+        /* SHOPPING TUGMASI (Jamoalar ostida) */
+        .shop-nav-wrapper {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        .shop-trigger-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            color: white;
+            padding: 22px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+            transition: 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .shop-trigger-btn:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.6);
+        }
+
+        /* 3-SAHIFA: GURUH ICHKI SAHIFASI */
+        .back-bar {
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            background: var(--surface);
+            color: white;
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.1); }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .group-header h2 { font-size: 2.2rem; font-weight: 800; }
+        
+        .youtube-link-btn {
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .youtube-link-btn:hover { opacity: 0.9; }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 25px 0 15px 0;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .member-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .member-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-4px);
+        }
+
+        .member-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+
+        .member-name {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sticker { font-size: 1.2rem; }
+
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .song-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-thumb {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .song-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .song-title { font-size: 0.95rem; font-weight: 700; }
+
+        .watch-btn {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .watch-btn:hover { background: #ff0000; }
+
+        .letter-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .letter-box textarea {
+            width: 100%;
+            height: 120px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 0.95rem;
+            resize: none;
+        }
+
+        .letter-box textarea:focus { outline: none; border-color: #fff; }
+
+        .send-letter-btn {
+            align-self: flex-start;
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .send-letter-btn:hover { background: #e2e8f0; }
+
+        /* 4-SAHIFA: SHOPPING STORE & SAVATCHA */
+        .shop-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .shop-layout { grid-template-columns: 1fr; }
+        }
+
+        .shop-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+        }
+
+        .product-img-wrapper {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: #000;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-img:hover {
+            transform: scale(1.08);
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ec4899;
+        }
+
+        .add-cart-btn {
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .add-cart-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+
+        /* SAVATCHA QISMI (HISOB-KITOB) */
+        .cart-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .cart-items-list {
+            max-height: 350px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 14px;
+            border-radius: 10px;
+        }
+
+        .cart-item-name { font-size: 0.9rem; font-weight: 600; }
+        .cart-item-price { font-size: 0.85rem; color: var(--text-muted); }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .qty-btn:hover { background: rgba(255,255,255,0.2); }
+
+        .cart-summary {
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
+
+        .summary-total {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--accent-green);
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .checkout-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+        /* IMAGE LIGHTBOX MODAL (RASMNI KATTASHTIRISH) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-img-container {
+            max-width: 90%;
+            max-height: 85vh;
+            position: relative;
+        }
+
+        .modal-img-container img {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: -10px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover { color: #ec4899; }
+    </style>
+</head>
+<body>
+
+    <!-- 1-SAHIFA: HERO -->
+    <section id="page-hero" class="page active">
+        <h1>K-POP UNIVERSE</h1>
+        <p>Sevimli guruhlaringiz dunyosiga qadam qo'ying va o'zingizga mos olamni tanlang.</p>
+        <button class="epic-btn" onclick="goToPage('page-select')">
+            Jamoa Tanlash <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </section>
+
+    <!-- 2-SAHIFA: JAMOALARNI TANLASH VA SHOPPING TUGMASI -->
+    <section id="page-select" class="page">
+        <h2>JAMOALARNI TANLASH</h2>
+        <p class="subtitle">O'zingiz sevimli K-pop guruhingizni tanlang</p>
+        
+        <div class="teams-grid" id="teamsContainer"></div>
+
+        <!-- YANGA ADDITION: SHOPPING TUGMASI -->
+        <div class="shop-nav-wrapper">
+            <button class="shop-trigger-btn" onclick="goToPage('page-shopping')">
+                <i class="fa-solid fa-bag-shopping"></i> K-POP SHOPPING HUB (Do'konga o'tish) 🛍️
+            </button>
+        </div>
+    </section>
+
+    <!-- 3-SAHIFA: DINAMIK GURUH SAHIFASI -->
+    <section id="page-group-detail" class="page">
+        <div class="back-bar">
+            <button class="back-btn" onclick="goToPage('page-select')"><i class="fa-solid fa-arrow-left"></i> Orqaga</button>
+        </div>
+        
+        <div class="group-header">
+            <h2 id="detailGroupName">Guruh Nomi</h2>
+            <a id="detailYoutubeChannel" href="#" target="_blank" class="youtube-link-btn">
+                <i class="fa-brands fa-youtube"></i> YouTube Kanal
+            </a>
+        </div>
+
+        <div class="section-title">Guruh A'zolari</div>
+        <div class="members-grid" id="detailMembers"></div>
+
+        <div class="section-title">Eng Mashhur 4 ta Qo'shig'i</div>
+        <div class="songs-grid" id="detailSongs"></div>
+
+        <div class="section-title">A'zolar uchun xat yozish</div>
+        <div class="letter-box">
+            <textarea id="letterInput" placeholder="Sevimli guruh a'zolariga o'z samimiy tilaklaringiz va xatingizni yozing..."></textarea>
+            <button class="send-letter-btn" onclick="sendLetter()">Xatni yuborish</button>
+        </div>
+    </section>
+
+    <!-- 4-SAHIFA: SHOPPING STORE (YANGI SAHIFA) -->
+    <section id="page-shopping" class="page">
+        <div class="back-bar">
+            <button class="back-btn" onclick="goToPage('page-select')"><i class="fa-solid fa-arrow-left"></i> Jamoalarga qaytish</button>
+        </div>
+
+        <h2>K-POP OFFICIAL STORE & MERCH</h2>
+        <p class="subtitle">Sevimli guruhlaringizning rasmiy laytstiklari, kiyimlar, albomlar va aksessuarlari</p>
+
+        <div class="shop-layout">
+            <!-- MAHSULOTLAR GRIDI -->
+            <div class="shop-products-grid" id="productsContainer"></div>
+
+            <!-- SAVATCHA VA HISOB-KITOB PANELI -->
+            <div class="cart-panel">
+                <div class="cart-title">
+                    <i class="fa-solid fa-cart-shopping"></i> Savatchangiz
+                </div>
+
+                <div class="cart-items-list" id="cartItemsContainer">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Savatchangiz bo'sh</p>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Jami mahsulotlar:</span>
+                        <span id="cartTotalItems">0 ta</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Umumiy summa:</span>
+                        <span class="summary-total" id="cartTotalPrice">$0</span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">
+                        <i class="fa-solid fa-credit-card"></i> Xaridni rasmiylashtirish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL (RASMNI KATTASHTIRISH) -->
+    <div class="modal-overlay" id="imgModal" onclick="closeModal()">
+        <div class="modal-img-container" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modalTargetImg" src="" alt="Enlarged View">
+        </div>
+    </div>
+
+    <script>
+        const groupsData = [
+            {
+                id: 'bts',
+                name: 'BTS',
+                gradient: 'linear-gradient(135deg, #4c1d95, #000000)',
+                emoji: '💜🖤',
+                ytChannel: 'https://www.youtube.com/@BTS',
+                members: [
+                    { name: 'RM', animal: '🐨', img: './rm.jpg'},
+                    { name: 'Jin', animal: '🐹', img: './jin.webp' },
+                    { name: 'Suga', animal: '🐱', img: './suga.jpg' },
+                    { name: 'J-Hope', animal: '🐿️', img: './jhope.jpg' },
+                    { name: 'Jimin', animal: '🐥', img: './jimin.jpg' },
+                    { name: 'V', animal: '🐻', img: './tae.jpg' },
+                    { name: 'Jungkook', animal: '🐰', img: './jk.jpg' }
+                ],
+                songs: [
+                    { title: 'Dynamite', thumb: './Dynamite.svg', link: 'https://www.youtube.com/watch?v=gdZLi9oWNZg' },
+                    { title: 'Butter', thumb: './Butter.jpg', link: 'https://www.youtube.com/watch?v=WMweEpGlu_U' },
+                    { title: 'Boy With Luv', thumb: './Boy With Luv.jpg', link: 'https://www.youtube.com/watch?v=XsX3vWDMWZW' },
+                    { title: 'DNA', thumb: './dan.jpg', link: 'https://www.youtube.com/watch?v=MBdVXkEuZzQ' }
+                ]
+            },
+            {
+                id: 'skz',
+                name: 'SKZ (Stray Kids)',
+                gradient: 'linear-gradient(135deg, #991b1b, #000000)',
+                emoji: '❤️🖤',
+                ytChannel: 'https://www.youtube.com/@StrayKids',
+                members: [
+                    { name: 'Bang Chan', animal: '🐺', img: './chan.jpg' },
+                    { name: 'Lee Know', animal: '🐰', img: './Lee Know.jpg' },
+                    { name: 'Changbin', animal: '🐰', img: './Changbin.jpg' },
+                    { name: 'Hyunjin', animal: '🥟', img: 'hyunjin.jpg' },
+                    { name: 'Han', animal: '🐿️', img: './han.jpg' },
+                    { name: 'Felix', animal: '🐥', img: './felix.jpg' },
+                    { name: 'Seungmin', animal: '🐶', img: 'seungmin.jpg' },
+                    { name: 'I.N', animal: '🦊', img: './i.n.jpg' }
+                ],
+                songs: [
+                    { title: 'God’s Menu', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=TQTlCHxyuu8' },
+                    { title: 'Thunderous', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=EaswWjyRDMU' },
+                    { title: 'Back Door', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=XxuioOBw5KU' },
+                    { title: 'S-Class', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=JsOOis4bZiY' }
+                ]
+            },
+            {
+                id: 'blackpink',
+                name: 'BLACKPINK',
+                gradient: 'linear-gradient(135deg, #db2777, #000000)',
+                emoji: '🩷🖤',
+                ytChannel: 'https://www.youtube.com/@BLACKPINK',
+                members: [
+                    { name: 'Jisoo', animal: '🐰', img: './jisoo.jpg' },
+                    { name: 'Jennie', animal: '🦥', img: './jennie.jpg' },
+                    { name: 'Rosé', animal: '🐿️', img: './rose.jpg' },
+                    { name: 'Lisa', animal: '🐥', img: './lisa.jpg' }
+                ],
+                songs: [
+                    { title: 'DDU-DU DDU-DU', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=IHNzOHi8sJs' },
+                    { title: 'Kill This Love', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=2S24-y0Ij3Y' },
+                    { title: 'How You Like That', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=ioNng23DkIM' },
+                    { title: 'Pink Venom', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=gQlMMD8auMs' }
+                ]
+            },
+            {
+                id: 'seventeen',
+                name: 'SEVENTEEN',
+                gradient: 'linear-gradient(135deg, #ec4899, #3b82f6)',
+                emoji: '🩷💙',
+                ytChannel: 'https://www.youtube.com/@pledis17',
+                members: [
+                    { name: 'S.Coups', animal: '🐶', img: './S.Coups.jpg' },
+                    { name: 'Jeonghan', animal: '😇', img: './Jeonghan.jpg' },
+                    { name: 'Joshua', animal: '🦌', img: './Joshua.jpg' },
+                    { name: 'Jek', animal: '🐱', img: './jek.jpg' },
+                    { name: 'Hoshi', animal: '🐹', img: './Hoshi.jpg' },
+                    { name: 'Wonwoo', animal: '🦊', img: './wonwoo.jpg' },
+                    { name: 'Woozi', animak: '🐆', img: './Woozi.jpg' }, 
+                ],
+                songs: [
+                    { title: 'Super', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=-w9kzkyhxvk' },
+                    { title: 'HOT', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=gdZLi9oWNZg' },
+                    { title: 'Left & Right', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=kdHeZg2uNzA' },
+                    { title: 'Rock with you', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=W3A4gJvWlD4' }
+                ]
+            },
+            {
+                id: 'enhypen',
+                name: 'ENHYPEN',
+                gradient: 'linear-gradient(135deg, #2563eb, #ea580c)',
+                emoji: '💙🧡',
+                ytChannel: 'https://www.youtube.com/@ENHYPENOFFICIAL',
+                members: [
+                    { name: 'Jungwon', animal: '🐈', img: './jungwon.jpg' },
+                    { name: 'Heeseung', animal: '🦌', img: './hesseung.jpg' },
+                    { name: 'Jay', animal: '🦅', img: './jay.jpg' },
+                    { name: 'Jake', animal: '🐕', img: './jake.jpg' },
+                    { name: 'Sunghoon', animal: '🐧', img: './sunhong' },
+                    { name: 'Su./' }
+                ],
+                songs: [
+                    { title: 'Bite Me', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=wXrvOqILxyY' },
+                    { title: 'Polaroid Love', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=Vl8q1cW3uic' },
+                    { title: 'Drunk-Dazed', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=c_VKqQJSeio' },
+                    { title: 'Future Perfect', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=w060p4kI020' }
+                ]
+            },
+            {
+                id: 'txt',
+                name: 'TXT',
+                gradient: 'linear-gradient(135deg, #16a34a, #2563eb)',
+                emoji: '💚💙',
+                ytChannel: 'https://www.youtube.com/@TXT_bighit',
+                members: [
+                    { name: 'Soobin', animal: '🐰', img: './' },
+                    { name: 'Yeonjun', animal: '🦊', img: './' },
+                    { name: 'Beomgyu', animal: '🐻', img: './' },
+                    { name: 'Taehyun', animal: '🐿️', img: './' },
+                    { name: 'Huening Kai', animal: '🐧', img: './' }
+                ],
+                songs: [
+                    { title: 'Good Boy Gone Bad', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=aI6x2uM2_V4' },
+                    { title: 'Sugar Rush Ride', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=6rO_AE3BCOk' },
+                    { title: '0X1=LOVESONG', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=d5uzg4gSSkk' },
+                    { title: 'Run Away', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=6Vgd_IjVufD' }
+                ]
+            },
+            {
+                id: 'itzy',
+                name: 'ITZY',
+                gradient: 'linear-gradient(135deg, #16a34a, #ca8a04)',
+                emoji: '💚💛',
+                ytChannel: 'https://www.youtube.com/@ITZY',
+                members: [
+                    { name: 'Yeji', animal: '🦊', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Lia', animal: '🦥', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Ryujin', animal: '🐅', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Chaeryeong', animal: '🦊', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Yuna', animal: '🐰', img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200&auto=format&fit=crop' }
+                ],
+                songs: [
+                    { title: 'WANNABE', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=fE2h3lGlOsk' },
+                    { title: 'LOCO', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=MjCMqUSw1Mk' },
+                    { title: 'Not Shy', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=xzsewIAibIE' },
+                    { title: 'CAKE', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=52x-z_083mI' }
+                ]
+            },
+            {
+                id: 'babymonster',
+                name: 'BABYMONSTER',
+                gradient: 'linear-gradient(135deg, #000000, #dc2626)',
+                emoji: '🖤❤️',
+                ytChannel: 'https://www.youtube.com/@BABYMONSTER',
+                members: [
+                    { name: 'Ruka', animal: '🐿️', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Pharita', animal: '🦌', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Asa', animal: '🐰', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Ahyeon', animal: '🐶', img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Rora', animal: '🐼', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Chiquita', animal: '🐱', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop' }
+                ],
+                songs: [
+                    { title: 'SHEESH', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=z7k-uHw5z-g' },
+                    { title: 'BATTER UP', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=Jm2E72qTXio' },
+                    { title: 'Stuck In The Middle', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=13wS8k_65Fk' },
+                    { title: 'LIKE THAT', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=s7w186mZ7tY' }
+                ]
+            },
+            {
+                id: 'gidle',
+                name: '(G)I-DLE',
+                gradient: 'linear-gradient(135deg, #dc2626, #7c3aed)',
+                emoji: '❤️💜',
+                ytChannel: 'https://www.youtube.com/@G_I_DLE',
+                members: [
+                    { name: 'Miyeon', animal: '🦊', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Minnie', animal: '🐱', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Soyeon', animal: '🦊', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Yuqi', animal: '🐶', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Shuhua', animal: '🐶', img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200&auto=format&fit=crop' }
+                ],
+                songs: [
+                    { title: 'Queencard', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=7hLhUypxL_Q' },
+                    { title: 'Tomboy', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=jhU0uXn5i7U' },
+                    { title: 'Nxde', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=fzeoibW6eNY' },
+                    { title: 'Super Lady', thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=tQO9c4uX3A4' }
+                ]
+            },
+            {
+                id: 'illit',
+                name: 'ILLIT',
+                gradient: 'linear-gradient(135deg, #facc15, #f472b6)',
+                emoji: '💛🩷',
+                ytChannel: 'https://www.youtube.com/@BELIFTLAB',
+                members: [
+                    { name: 'Yunah', animal: '🐈', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Minju', animal: '🐰', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Moka', animal: '🐹', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Wonhee', animal: '🐿️', img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200&auto=format&fit=crop' },
+                    { name: 'Iroha', animal: '🐥', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' }
+                ],
+                songs: [
+                    { title: 'Magnetic', thumb: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=Vk5-c_v4gMU' },
+                    { title: 'My World', thumb: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=Vk5-c_v4gMU' },
+                    { title: 'Lucky Girl Syndrome', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop', link: 'https://www.youtube.com/watch?v=Vk5-c_v4gMU' }
+                ]
+            }
+        ];
+
+        // SHOPPING MAHSULOTLARI RO'YXATI
+        const productsData = [
+            // BTS
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './fanarigi.webp' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './BTS sumkasi.webp' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './ONO.webp' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './111111.webp' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './brilok.webp' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './blaknot.webp' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './BTS kepka.webp' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './BAKAL.webp' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './====.webp' },
+            // SKZ 
+            { id: 101, name: 'SKZ fanarigi', category: 'Fanarig (Laytstik)', price: 300, img: './SKZ.jpg' },
+            { id: 102, name: 'SKZni sumkasi', category: 'sumkasi (Laytstik)', price: 211, img: './SKZ 99.webp' },
+            { id: 103, name: 'SKZ uno karta', category: 'uno (laytstik)', price: 37, img: 'Streykids.jpg' },
+            { id: 104, name: 'SKZ chihol', category: 'chihol (Laytstik)', price: 129, img: 'SKZ CHIHOL.jpg' },
+            { id: 105, name: 'SKZ brilok', category: 'brilok (Hudi)', price: 69, img: 'skzbrilok.jpg' },
+            { id: 106, name: 'SKZ blaknot', category: 'blaknot (Top & Futbolka)', price: 57, img: './SKZ-2.webp' },
+            { id: 107, name: 'SKZ kepka', category: 'Kepka', price: 100, img: 'SKZ33.webp' },
+            { id: 108, name: 'SKZ bakal', category: 'bakal', price: 109 , img: 'SKZ88.jpg' },
+            { id: 109, name: 'SKZ nabor', category: 'nabor', price: 30, img: './SKZ22.jpg' },
+            // BLACKPINK
+            { id: 101, name: 'BLACKPINK fanarigi', category: 'Fanarig (Laytstik)', price: 300, img: './BLACKPINK.jpg' },
+            { id: 102, name: 'BLACKPINKni sumkasi', category: 'sumkasi (Laytstik)', price: 211, img: './BLACKPINK00.jpg' },
+            { id: 103, name: 'BLACKPINK karta', category: 'karta (laytstik)', price: 37, img: './BLACKPINK11.jpg' },
+            { id: 104, name: 'BLACKPINK chihol', category: 'chihol (Laytstik)', price: 129, img: './BLACKPINK22.jpeg' },
+            { id: 105, name: 'BLACKPINK brilok', category: 'brilok (Hudi)', price: 69, img: './BLACKPINK33.webp' },
+            { id: 106, name: 'BLACKPINK blaknot', category: 'blaknot (Top & Futbolka)', price: 57, img: 'BLACKPINK44.jpg' },
+            { id: 107, name: 'BLACKPINK kepka', category: 'Kepka', price: 100, img: './BLACKPINK55.webp' },
+            { id: 108, name: ' BLACKPINK bakal', category: 'bakal', price: 109 , img: './BLACKPINK66.webp' },
+            { id: 109, name: 'BLACKPINK nabor', category: 'nabor', price: 30, img: './BLACKPINK77.webp' },
+            // SEVENTEEN
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './1111.jpg' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './2222.jpg' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './IMG_8286.webp' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './4444.jpg' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './5555.jpg' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './6666.jpg' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './7777.jpg' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './8888.jpg' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './9999.jpg' },
+            // ENHYPEN
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './' },
+            // TXT
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './' },
+            // ITZY
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './' },
+            // BABYMONSTER
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './' },
+            // (G)I-DLE
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './' },
+            // ILLIT
+            { id: 101, name: 'BTS fanarigi', category: 'Fanarig (Laytstik)', price: 310, img: './' },
+            { id: 102, name: 'BTSni sumkasi', category: 'sumkasi (Laytstik)', price: 251, img: './' },
+            { id: 103, name: 'BTS uno karta', category: 'uno (laytstik)', price: 54, img: './' },
+            { id: 104, name: 'BTS chihol', category: 'chihol (Laytstik)', price: 157, img: './' },
+            { id: 105, name: 'BTS brilok', category: 'brilok (Hudi)', price: 79, img: './' },
+            { id: 106, name: 'BTS blaknot', category: 'blaknot (Top & Futbolka)', price: 77, img: './' },
+            { id: 107, name: 'BTS kepka', category: 'Kepka', price: 100, img: './' },
+            { id: 108, name: 'BTS bakal', category: 'bakal', price: 109 , img: './' },
+            { id: 109, name: 'BTS nabor', category: 'nabor', price: 30, img: './' },
+
+        ];
+
+        let cart = [];
+
+        // SAHIFALAR O'RTASIDA O'TISH
+        function goToPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // JAMOALAR RO'YXATINI CHIQARISH
+        function renderTeams() {
+            const container = document.getElementById('teamsContainer');
+            container.innerHTML = '';
+
+            groupsData.forEach(group => {
+                const btn = document.createElement('button');
+                btn.className = 'team-btn';
+                btn.style.background = group.gradient;
+                btn.onclick = () => openGroupDetail(group.id);
+                btn.innerHTML = `
+                    <span>${group.name}</span>
+                    <span>${group.emoji}</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // GURUH TAFSILOTLARINI CHIQARISH
+        function openGroupDetail(groupId) {
+            const group = groupsData.find(g => g.id === groupId);
+            if (!group) return;
+
+            document.getElementById('detailGroupName').textContent = group.name;
+            document.getElementById('detailYoutubeChannel').href = group.ytChannel;
+
+            // Members
+            const membersContainer = document.getElementById('detailMembers');
+            membersContainer.innerHTML = group.members.map(m => `
+                <div class="member-card">
+                    <img src="${m.img}" alt="${m.name}" class="member-img" onclick="openModal('${m.img}')">
+                    <div class="member-name">
+                        <span>${m.name}</span>
+                        <span class="sticker">${m.animal}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Songs
+            const songsContainer = document.getElementById('detailSongs');
+            songsContainer.innerHTML = group.songs.map(s => `
+                <div class="song-card">
+                    <img src="${s.thumb}" alt="${s.title}" class="song-thumb" onclick="openModal('${s.thumb}')">
+                    <div class="song-info">
+                        <div class="song-title">${s.title}</div>
+                        <a href="${s.link}" target="_blank" class="watch-btn">
+                            <i class="fa-brands fa-youtube"></i> Tomosha qilish
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+
+            goToPage('page-group-detail');
+        }
+
+        // SHOPPING MAHSULOTLARINI CHIQARISH
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = productsData.map(p => `
+                <div class="product-card">
+                    <div>
+                        <div class="product-img-wrapper">
+                            <img src="${p.img}" alt="${p.name}" class="product-img" onclick="openModal('${p.img}')">
+                        </div>
+                        <div class="product-category">${p.category}</div>
+                        <div class="product-title">${p.name}</div>
+                    </div>
+                    <div class="product-bottom">
+                        <div class="product-price">$${p.price}</div>
+                        <button class="add-cart-btn" onclick="addToCart(${p.id})">
+                            <i class="fa-solid fa-plus"></i> Harid qilish
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // SAVATCHA FUNKSIYALARI VA HISOB-KITOB
+        function addToCart(productId) {
+            const product = productsData.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            renderCart();
+        }
+
+        function updateQty(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.qty += change;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalItemsEl = document.getElementById('cartTotalItems');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Savatchangiz bo'sh</p>`;
+                totalItemsEl.textContent = '0 ta';
+                totalPriceEl.textContent = '$0';
+                return;
+            }
+
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            container.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.qty;
+                totalItems += item.qty;
+                totalPrice += itemTotal;
+
+                return `
+                    <div class="cart-item">
+                        <div>
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price} × ${item.qty} = <b>$${itemTotal}</b></div>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalItemsEl.textContent = `${totalItems} ta`;
+            totalPriceEl.textContent = `$${totalPrice}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Savatchangiz bo\'sh! Iltimos, avval mahsulot tanlang.');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            alert(`Xaridingiz uchun rahmat! Jami summa: $${total}\nBuyurtmangiz muvaffaqiyatli qabul qilindi! ✨🛍️`);
+            cart = [];
+            renderCart();
+        }
+
+        // XAT YOZISH FUNKSIYASI
+        function sendLetter() {
+            const input = document.getElementById('letterInput');
+            if (input.value.trim() === '') {
+                alert('Iltimos, avval xat matnini kiriting!');
+                return;
+            }
+            alert('Samimiy xatingiz muvaffaqiyatli yuborildi! ✨');
+            input.value = '';
+        }
+
+        // LIGHTBOX MODAL (RASMNI KATTASHTIRISH)
+        function openModal(imgSrc) {
+            document.getElementById('modalTargetImg').src = imgSrc;
+            document.getElementById('imgModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imgModal').classList.remove('active');
+        }
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTeams();
+            renderProducts();
+        });
+        
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
